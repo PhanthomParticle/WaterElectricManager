@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+/* Water&Electric Manager
+ * @author            PhanthomParticle
+ * @version           1.0.0
+ * @last-time         2015.6.7
+ *
+ */
+
+
+/* 文件载入
+ ----------------------------------------------------------*/
+ @import  "./style/data";                    /* 变量文件  */
+ @import  "./style/font";					 /* Web 字体  */
+ @import  "./style/mixin";                   /* 混入文件  */
+ @import  "./style/animation";				 /* CSS3动画  */
+ @import  "./reset";                  		 /* CSS Reset */
+ @import  "./csshake";                 		 /* css hake  */
+
+
+/* 页面
+ ---------------------------------------------------------- */
+html, body {
+	width: 100%;
+	height: 100%;
+	font: 17px/1.5 normal Microsoft Yahei, "黑体", "宋体", Helvetica, Arial, sans-serif;
+}
+
+#aside {
+	width: 25%;
+	height: 100%;
+	float: left;
+}
+.asideMenu {
+	width: 100%;
+	height: 100%;
+	background: lighten($base-blue, 55%);
+}
+
+.asideMenu li {
+	width: 100%;
+	height: 50px;
+	float: left;
+}
+
+.asideMenu li a {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	font: 24px/50px normal Microsoft Yahei, "黑体", "宋体", Helvetica, Arial, sans-serif;
+	color: $base-blue;
+	text-shadow: inset 0 -1px 2px rgba(0,0,0,.3), 0px 1px 2px rgba(255,255,255,1);
+	text-align: center;
+	&:hover {
+		background: lighten($base-blue, 45%);
+	}
+}
