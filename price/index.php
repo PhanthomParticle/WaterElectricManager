@@ -25,9 +25,9 @@
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 	<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
-	<link rel="stylesheet" type="text/css" href="css/menu.css">
+	<link rel="stylesheet" type="text/css" href="../css/menu.css">
 	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript" src="../js/menu.js"></script>
 </head>
 <body>
 	<div id="header">
