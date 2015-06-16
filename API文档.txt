@@ -50,8 +50,8 @@ user    用户模块    管理用户
 	ajax_userinfo.php   用户信息管理API
 		getinfo  获取用户信息  GET  id 用户uuid
 		setinfo  设置用户信息  POST  
-		addE	增加电表   POST  id  用户的uuid,ename  电表编号,rate  倍率
-		addW    增加水表   POST  id  用户的uuid,wname  水表编号
+		addE	增加电表   POST  uuid  用户的uuid,ename  电表编号,rate  倍率,inite  电表初值
+		addW    增加水表   POST  uuid  用户的uuid,wname  水表编号,initw  水表初值
 		getE    获取电表信息  GET  id  电表的id
 		getW    获取水表信息  GET  id  水表的id
 		modiE    修改电表信息  POST  id  电表id,ename  电表编号,rate  倍率
