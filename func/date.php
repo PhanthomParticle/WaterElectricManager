@@ -5,5 +5,8 @@
 	function GetYearMonth() {
 		return date("Y-m");
 	}
+	function GetDate(){
+		return date("Y-m-d");
+	}
 
 ?>
