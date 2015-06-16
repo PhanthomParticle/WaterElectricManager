@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	//------------------------------删除
 	$(".delE").click(function(){
 		var id=$(this).attr("href") || null;
 		if(id!=null){
@@ -55,8 +56,11 @@ $(document).ready(function(){
 			Geid=id;
 			var ename=$(this).prevAll()[5].innerHTML;
 			var rate=$(this).prevAll()[3].innerHTML;
+			var notee=$(this).prevAll()[1].innerHTML;
 			$("#ename").val(ename);
 			$("#rate").val(rate);
+			$("#inite").val("此项无效,不用填");
+			$("#notee").val(notee);
 			var html="<span onclick=\"modifyE()\">修改</span><span onclick=\"cebox()\">取消</span>";
 			$("#efunc").html(html);
 			cebox();
@@ -70,7 +74,10 @@ $(document).ready(function(){
 		if(id!=null){
 			Gwid=id;
 			var wname=$(this).prevAll()[3].innerHTML;
+			var notew=$(this).prevAll()[1].innerHTML;
 			$("#wname").val(wname);
+			$("#initw").val("此项无效,不用填");
+			$("#notew").val(notew);
 			var html="<span onclick=\"modifyW()\">修改</span><span onclick=\"cwbox()\">取消</span>";
 			$("#wfunc").html(html);
 			cwbox();
@@ -86,25 +93,30 @@ function openeadd(){
 	var html="<span onclick=\"eadd()\">增加</span><span onclick=\"cebox()\">取消</span>";
 	$("#ename").val("");
 	$("#rate").val("");
+	$("#inite").val("");
+	$("#notee").val("");
 	$("#efunc").html(html);
 	cebox();
 }
 function openwadd(){
 	var html="<span onclick=\"wadd()\">增加</span><span onclick=\"cwbox()\">取消</span>";
 	$("#wname").val("");
+	$("#initw").val("");
+	$("#notew").val("");
 	$("#wfunc").html(html);
 	cwbox();
 }
 function modifyE(){
 	var ename=$("#ename").val();
 	var rate=$("#rate").val();
+	var notee=$("#notee").val();
 	if(ename!="" && rate!=""){
 		$.ajax({
 		cache: false,
 		type: "POST",
 		url:"ajax_userinfo.php?method=modifyE",
 		async: true,
-		data: {"id":Geid,"ename":ename,"rate":rate},
+		data: {"id":Geid,"ename":ename,"rate":rate,"notee":notee},
 		dataType:"json",
 		error: function(request){
 			alert("连接失败");
@@ -128,13 +140,14 @@ function modifyE(){
 }
 function modifyW(){
 	var wname=$("#wname").val();
+	var notew=$("#notew").val();
 	if(wname!=""){
 		$.ajax({
 		cache: false,
 		type: "POST",
 		url:"ajax_userinfo.php?method=modifyW",
 		async: true,
-		data: {"id":Gwid,"wname":wname},
+		data: {"id":Gwid,"wname":wname,"notew":notew},
 		dataType:"json",
 		error: function(request){
 			alert("连接失败");
@@ -159,13 +172,14 @@ function modifyW(){
 function eadd(){
 	var ename=$("#ename").val();
 	var rate=$("#rate").val();
+	var inite=$("#inite").val();
 	if(ename!="" && rate!=""){
 		$.ajax({
 		cache: false,
 		type: "POST",
 		url:"ajax_userinfo.php?method=addE",
 		async: true,
-		data: {"uuid":Guuid,"ename":ename,"rate":rate},
+		data: {"uuid":Guuid,"ename":ename,"rate":rate,"inite":inite},
 		dataType:"json",
 		error: function(request){
 			alert("连接失败");
@@ -189,13 +203,14 @@ function eadd(){
 }
 function wadd(){
 	var wname=$("#wname").val();
+	var initw=$("#initw").val();
 	if(wname!=""){
 		$.ajax({
 		cache: false,
 		type: "POST",
 		url:"ajax_userinfo.php?method=addW",
 		async: true,
-		data: {"uuid":Guuid,"wname":wname},
+		data: {"uuid":Guuid,"wname":wname,"initw":initw},
 		dataType:"json",
 		error: function(request){
 			alert("连接失败");

@@ -38,7 +38,12 @@
 			<p>
 				<input type="text" name="rate" id="rate" placeholder="倍率">
 			</p>
-			
+			<p>
+				<input type="text" name="inite" id="inite" placeholder="电表读数初值">
+			</p>
+			<p>
+				<input type="text" name="notee" id="notee" placeholder="备注">
+			</p>
 			<p id="efunc">
 				
 			</p>
@@ -50,7 +55,13 @@
 		<form action="" id="wform">
 			<p>
 				<input type="text" name="wname" id="wname" placeholder="水表编号">
-			</p>			
+			</p>
+			<p>
+				<input type="text" name="initw" id="initw" placeholder="水表读数初值">
+			</p>
+			<p>
+				<input type="text" name="notew" id="notew" placeholder="备注">
+			</p>
 			<p id="wfunc">
 				
 			</p>
