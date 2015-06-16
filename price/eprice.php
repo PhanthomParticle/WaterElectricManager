@@ -1,17 +1,14 @@
 <?php
-	// error_reporting(null);
-	// session_start();
-	// include("../medoo.php");
-	// $databases=new medoo();
-	// if(isset($_SESSION["admin"]) && $_SESSION["admin"]==2){
+	error_reporting(null);
+	session_start();
+	include("../medoo.php");
+	$databases=new medoo();
+	if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 
-	// }else{
-	// 	echo "你没有权限管理此页面";
-	// 	exit;
-	// }
-
-
-
+	}else{
+		echo "你没有权限管理此页面";
+		exit;
+	}
 
 ?>
 <!DOCTYPE html>
@@ -45,31 +42,24 @@
 		<span id="addService" onclick="openadd()">增加电价类型</span>
 	</p>
 	<ul id="list">
-		<li>
-			<span class="autoid">1</span>
-			<span class="name">商用电价</span>
-			<span class="price">1.2</span>
-			<a href="1" class="modify">修改</a>
-			<a href="1" class="del">删除</a>
-		</li>
-		<li>
-			<span class="autoid">1</span>
-			<span class="name">民用电价</span>
-			<span class="price">1.2</span>
-			<a href="1" class="modify">修改</a>
-			<a href="1" class="del">删除</a>
-		</li>
+		<?php
+			$datas=$databases->select("eprice",array(
+				"id",
+				"name",
+				"price"
+			));
+			for($i=0; $i<count($datas); ++$i){
+				echo "<li>";
+					echo "<span class=\"autoid\">".($i+1)."</span>";
+					echo "<span class=\"name\">".$datas[$i]["name"]."</span>";
+					echo "<span class=\"price\">".$datas[$i]["price"]."</span>";
+					echo "<a href=\"".$datas[$i]["id"]."\" class=\"modify\">修改</a>";
+					echo "<a href=\"".$datas[$i]["id"]."\" class=\"del\">删除</a>";
+				echo "</li>";
+			}
 
-		<li>
-			<span class="autoid">1</span>
-			<span class="name">工业电价</span>
-			<span class="price">1.2</span>
-			<a href="1" class="modify">修改</a>
-			<a href="1" class="del">删除</a>
-		</li>
-
-		
-		
+		?>
+					
 	</ul>
 </body>
 </html>

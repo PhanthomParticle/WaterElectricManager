@@ -7,9 +7,9 @@ $(document).ready(function(){
 				$.get("ajax_price.php?method=delW",{"id":id},function(data){
 					if(data.state=="success"){
 						window.location.href=window.location.href;
-					}else if(data.message=="no login"){
+					}else if(data.message=="not login"){
 						alert("请先登录");
-					}else if(data.message=="no id"){
+					}else if(data.message=="data wrong"){
 						alert("参数错误，请刷新页面");
 						window.location.href=window.location.href;
 					}else{
@@ -60,11 +60,13 @@ function ajaxmodify(){
 	        	alert("修改成功");
 	        	closeBox();
 	        	window.location.href=window.location.href;
-	        }else if(data.message=="no login"){
+	        }else if(data.message=="not login"){
 	        	alert("请先登录");
 	        }else if(data.message=="system wrong"){
 	        	alert("系统繁忙");
 	        	window.location.href=window.location.href;
+	        }else{
+	        	alert("未知的错误");
 	        }
 		}
 	});
@@ -86,11 +88,13 @@ function ajaxadd(){
 	        	alert("添加成功");
 	        	closeBox();
 	        	window.location.href=window.location.href;
-	        }else if(data.message=="no login"){
+	        }else if(data.message=="not login"){
 	        	alert("请先登录");
 	        }else if(data.message=="system wrong"){
 	        	alert("系统繁忙");
 	        	window.location.href=window.location.href;
+	        }else{
+	        	alert("未知的错误");
 	        }
 		}
 	});
