@@ -8,11 +8,13 @@ $(document).ready(function(){
 					if(data.state=="success"){
 						alert("删除成功");
 						window.location.href=window.location.href;
-					}else if(data.message=="no login"){
+					}else if(data.message=="not login"){
 						alert("请先登录");
 					}else if(data.message=="no id"){
 						alert("参数错误，请刷新页面");
 						window.location.href=window.location.href;
+					}else if(data.message=="system wrong"){
+						alert("系统繁忙");
 					}else{
 						alert("未知的错误");
 						window.location.href=window.location.href;
@@ -34,11 +36,13 @@ $(document).ready(function(){
 					if(data.state=="success"){
 						alert("注销成功");
 						window.location.href=window.location.href;
-					}else if(data.message=="no login"){
+					}else if(data.message=="not login"){
 						alert("请先登录");
 					}else if(data.message=="no id"){
 						alert("参数错误，请刷新页面");
 						window.location.href=window.location.href;
+					}else if(data.message=="system wrong"){
+						alert("系统繁忙");
 					}else{
 						alert("未知的错误");
 						window.location.href=window.location.href;
@@ -60,11 +64,13 @@ $(document).ready(function(){
 					if(data.state=="success"){
 						alert("激活成功");
 						window.location.href=window.location.href;
-					}else if(data.message=="no login"){
+					}else if(data.message=="not login"){
 						alert("请先登录");
 					}else if(data.message=="no id"){
 						alert("参数错误，请刷新页面");
 						window.location.href=window.location.href;
+					}else if(data.message=="system wrong"){
+						alert("系统繁忙");
 					}else{
 						alert("未知的错误");
 						window.location.href=window.location.href;
@@ -77,4 +83,16 @@ $(document).ready(function(){
 
 		return false;
 	});
+	$("#start").click(function(){
+		var page=$("#topage").val() || 1;
+		var baseurl=$(this).attr("href");
+		window.location.href=baseurl+"&page="+page;
+		return false;
+	});
 });
+function searchBy(){
+	var type=$("#type option:selected").val();
+	var value=$("#value").val();
+	window.location.href="user.php?type="+type+"&value="+value+"&page=1";
+	return false;
+}

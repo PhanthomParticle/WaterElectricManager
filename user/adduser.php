@@ -1,14 +1,14 @@
 <?php
-	// error_reporting(null);
-	// session_start();
-	// include("../medoo.php");
-	// $databases=new medoo();
-	// if(isset($_SESSION["admin"]) && $_SESSION["admin"]==2){
+	error_reporting(null);
+	session_start();
+	include("../medoo.php");
+	$databases=new medoo();
+	if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 
-	// }else{
-	// 	echo "你没有权限管理此页面";
-	// 	exit;
-	// }
+	}else{
+		echo "你没有权限管理此页面";
+		exit;
+	}
 
 
 
@@ -28,7 +28,7 @@
 </head>
 <body>
 	
-	<p class="title"><a href="user.php" class="return">&lt;返回</a>添加新用户</p>
+	<p class="title"><!-- <a href="user.php" class="return">&lt;返回</a> -->添加新用户</p>
 	
 	<div id="userinfo">
 		<form action="ajax_user.php?method=adduser" method="POST" action="ajax_user.php?method=adduser" id="infoform" onsubmit="return ajax_adduser()">
@@ -60,12 +60,23 @@
 					<span class="item">用户类型</span>
 					<select name="type" id="type">
 						<option value="1">工资扣款</option>
+						<option value="2">一卡通扣款</option>
+						<option value="3">现金扣款</option>
 					</select>
 				</li>
 				<li>
 					<span class="item">电价类型</span>
-					<select name="etype" id="etype">
-						<option value="1">居民用电</option>
+					<select name="etype" id="etype" onchange="Cetype()">
+						<?php
+							$datas=$databases->select("eprice",array(
+								"name",
+								"price"
+							));
+							for($i=0; $i<count($datas); ++$i){
+								echo "<option value=\"".$datas[$i]["price"]."\">".$datas[$i]["name"]."</option>";
+							}
+						?>
+						
 					</select>
 				</li>
 				<li>
@@ -77,8 +88,16 @@
 				</li>
 				<li>
 					<span class="item">水价类型</span>
-					<select name="wtype" id="wtype">
-						<option value="1">居民用水</option>
+					<select name="wtype" id="wtype" onchange="Cwtype()">
+						<?php
+							$datas=$databases->select("wprice",array(
+								"name",
+								"price"
+							));
+							for($i=0; $i<count($datas); ++$i){
+								echo "<option value=\"".$datas[$i]["price"]."\">".$datas[$i]["name"]."</option>";
+							}
+						?>
 					</select>
 				</li>
 				<li>

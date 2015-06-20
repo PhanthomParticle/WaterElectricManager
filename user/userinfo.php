@@ -1,14 +1,14 @@
 <?php
-	// error_reporting(null);
-	// session_start();
-	// include("../medoo.php");
-	// $databases=new medoo();
-	// if(isset($_SESSION["admin"]) && $_SESSION["admin"]==2){
+	error_reporting(null);
+	session_start();
+	include("../medoo.php");
+	$databases=new medoo();
+	if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 
-	// }else{
-	// 	echo "你没有权限管理此页面";
-	// 	exit;
-	// }
+	}else{
+		echo "你没有权限管理此页面";
+		exit;
+	}
 
 
 
@@ -25,6 +25,13 @@
 	<link rel="stylesheet" type="text/css" href="css/userinfo.css">
 	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="js/userinfo.js"></script>
+	<script type="text/javascript">
+	<?php
+		$uuid=$_GET["id"];
+		echo "var Guuid=\"".$uuid."\";";
+	?>
+		
+	</script>
 </head>
 <body>
 	
@@ -70,7 +77,7 @@
 	<!--  -->
 
 	<div id="userinfo">
-		<form action="" method="POST" action="ajax_user.php?method=setinfo" id="infoform">
+		<form action="" method="POST" action="ajax_user.php?method=setinfo" id="infoform" onsubmit="return ajax_save()">
 			<ul>
 				<li>
 					<span class="item">区号</span>
@@ -99,12 +106,23 @@
 					<span class="item">用户类型</span>
 					<select name="type" id="type">
 						<option value="1">工资扣款</option>
+						<option value="2">一卡通扣款</option>
+						<option value="3">现金扣款</option>
 					</select>
 				</li>
 				<li>
 					<span class="item">电价类型</span>
-					<select name="etype" id="etype">
-						<option value="1">居民用电</option>
+					<select name="etype" id="etype" onchange="Cetype()">
+						<?php
+							$datas=$databases->select("eprice",array(
+								"name",
+								"price"
+							));
+							for($i=0; $i<count($datas); ++$i){
+								echo "<option value=\"".$datas[$i]["price"]."\">".$datas[$i]["name"]."</option>";
+							}
+						?>
+						
 					</select>
 				</li>
 				<li>
@@ -116,8 +134,16 @@
 				</li>
 				<li>
 					<span class="item">水价类型</span>
-					<select name="wtype" id="wtype">
-						<option value="1">居民用水</option>
+					<select name="wtype" id="wtype" onchange="Cwtype()">
+						<?php
+							$datas=$databases->select("wprice",array(
+								"name",
+								"price"
+							));
+							for($i=0; $i<count($datas); ++$i){
+								echo "<option value=\"".$datas[$i]["price"]."\">".$datas[$i]["name"]."</option>";
+							}
+						?>
 					</select>
 				</li>
 				<li>
@@ -140,33 +166,56 @@
 	<p class="title">用户电表信息 <span class="add" onclick="openeadd()">增加电表</span></p>
 	<div id="electric">
 		<ul>
-			<li>
-				<span>1</span>
-				<span>编号:</span>
-				<span>201</span>
-				<span>倍率:</span>
-				<span>4</span>
-				<span>备注:</span>
-				<span>什大幅度飞地方附带</span>
-				<a href="25626" class="delE">删除</a>
-				<a href="1231" class="modifyE">修改</a>
-			</li>
+		<?php
+			$datas=$databases->select("electric",array(
+				"id",
+				"name",
+				"rate",
+				"note"
+				),array(
+				"uid"=>$uuid
+			));
+			for($i=0; $i<count($datas); ++$i){
+				echo "<li>";
+					echo "<span>".($i+1)."</span>";
+					echo "<span>编号:</span>";
+					echo "<span>".$datas[$i]["name"]."</span>";
+					echo "<span>倍率:</span>";
+					echo "<span>".$datas[$i]["rate"]."</span>";
+					echo "<span>备注:</span>";
+					echo "<span>".$datas[$i]["note"]."</span>";
+					echo "<a href=\"".$datas[$i]["id"]."\" class=\"delE\">删除</a>";
+					echo "<a href=\"".$datas[$i]["id"]."\" class=\"modifyE\">修改</a>";
+				echo "</li>";
+			}
+		?>
+			
 			
 		</ul>
 	</div>
 	<p class="title">用户水表信息 <span class="add" onclick="openwadd()">增加水表</span></p>
 	<div id="water">
 		<ul>
-			<li>
-				<span>1</span>
-				<span>编号:</span>
-				<span>201</span>
-				<span>备注:</span>
-				<span>什大幅度飞地方附带</span>
-				<a href="25626" class="delW">删除</a>
-				<a href="1231" class="modifyW">修改</a>
-			</li>
-			
+		<?php
+			$datas=$databases->select("water",array(
+				"id",
+				"name",
+				"note"
+				),array(
+				"uid"=>$uuid
+			));
+			for($i=0; $i<count($datas); ++$i){
+				echo "<li>";
+					echo "<span>".($i+1)."</span>";
+					echo "<span>编号:</span>";
+					echo "<span>".$datas[$i]["name"]."</span>";
+					echo "<span>备注:</span>";
+					echo "<span>".$datas[$i]["note"]."</span>";
+					echo "<a href=\"".$datas[$i]["id"]."\" class=\"delW\">删除</a>";
+					echo "<a href=\"".$datas[$i]["id"]."\" class=\"modifyW\">修改</a>";
+				echo "</li>";
+			}
+		?>		
 		</ul>
 	</div>
 </body>

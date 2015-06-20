@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	ajax_get();
 	//------------------------------删除
 	$(".delE").click(function(){
 		var id=$(this).attr("href") || null;
@@ -9,11 +10,13 @@ $(document).ready(function(){
 					if(data.state=="success"){
 						alert("删除成功");
 						window.location.href=window.location.href;
-					}else if(data.message=="no login"){
+					}else if(data.message=="not login"){
 						alert("请先登录");
 					}else if(data.message=="no id"){
 						alert("参数错误，请刷新页面");
 						window.location.href=window.location.href;
+					}else if(data.message=="system wrong"){
+						alert("系统繁忙，请检查数据完整性");
 					}else{
 						alert("未知的错误");
 						window.location.href=window.location.href;
@@ -34,11 +37,13 @@ $(document).ready(function(){
 					if(data.state=="success"){
 						alert("删除成功");
 						window.location.href=window.location.href;
-					}else if(data.message=="no login"){
+					}else if(data.message=="not login"){
 						alert("请先登录");
 					}else if(data.message=="no id"){
 						alert("参数错误，请刷新页面");
 						window.location.href=window.location.href;
+					}else if(data.message=="system wrong"){
+						alert("系统繁忙，请检查数据完整性");
 					}else{
 						alert("未知的错误");
 						window.location.href=window.location.href;
@@ -106,6 +111,14 @@ function openwadd(){
 	$("#wfunc").html(html);
 	cwbox();
 }
+function Cetype(){
+	var eprice=$("#etype option:selected").val();
+	$("#eprice").val(eprice);
+}
+function Cwtype(){
+	var wprice=$("#wtype option:selected").val();
+	$("#wprice").val(wprice);
+}
 function modifyE(){
 	var ename=$("#ename").val();
 	var rate=$("#rate").val();
@@ -126,11 +139,15 @@ function modifyE(){
 	        	alert("修改成功");
 	        	cebox();
 	        	window.location.href=window.location.href;
-	        }else if(data.message=="no login"){
+	        }else if(data.message=="not login"){
 	        	alert("请先登录");
 	        }else if(data.message=="system wrong"){
 	        	alert("系统繁忙");
 	        	window.location.href=window.location.href;
+	        }else if(data.message=="no id"){
+	        	alert("参数错误，请刷新页面");
+	        }else{
+	        	alert("未知的错误");
 	        }
 		}
 		});
@@ -157,11 +174,15 @@ function modifyW(){
 	        	alert("修改成功");
 	        	cwbox();
 	        	window.location.href=window.location.href;
-	        }else if(data.message=="no login"){
+	        }else if(data.message=="not login"){
 	        	alert("请先登录");
 	        }else if(data.message=="system wrong"){
 	        	alert("系统繁忙");
 	        	window.location.href=window.location.href;
+	        }else if(data.message=="no id"){
+	        	alert("参数错误，请刷新页面");
+	        }else{
+	        	alert("未知的错误");
 	        }
 		}
 		});
@@ -173,13 +194,14 @@ function eadd(){
 	var ename=$("#ename").val();
 	var rate=$("#rate").val();
 	var inite=$("#inite").val();
+	var notee=$("#notee").val();
 	if(ename!="" && rate!=""){
 		$.ajax({
 		cache: false,
 		type: "POST",
 		url:"ajax_userinfo.php?method=addE",
 		async: true,
-		data: {"uuid":Guuid,"ename":ename,"rate":rate,"inite":inite},
+		data: {"uuid":Guuid,"ename":ename,"rate":rate,"inite":inite,"notee":notee},
 		dataType:"json",
 		error: function(request){
 			alert("连接失败");
@@ -189,11 +211,17 @@ function eadd(){
 	        	alert("增加成功");
 	        	cebox();
 	        	window.location.href=window.location.href;
-	        }else if(data.message=="no login"){
+	        }else if(data.message=="not login"){
 	        	alert("请先登录");
 	        }else if(data.message=="system wrong"){
 	        	alert("系统繁忙");
 	        	window.location.href=window.location.href;
+	        }else if(data.message=="no id"){
+	        	alert("参数错误，请刷新页面");
+	        }else if(data.message=="already"){
+	        	alert("已经存在相同名字的表");
+	        }else{
+	        	alert("未知的错误");
 	        }
 		}
 		});
@@ -204,13 +232,14 @@ function eadd(){
 function wadd(){
 	var wname=$("#wname").val();
 	var initw=$("#initw").val();
+	var notew=$("#notew").val();
 	if(wname!=""){
 		$.ajax({
 		cache: false,
 		type: "POST",
 		url:"ajax_userinfo.php?method=addW",
 		async: true,
-		data: {"uuid":Guuid,"wname":wname,"initw":initw},
+		data: {"uuid":Guuid,"wname":wname,"initw":initw,"notew":notew},
 		dataType:"json",
 		error: function(request){
 			alert("连接失败");
@@ -220,17 +249,92 @@ function wadd(){
 	        	alert("增加成功");
 	        	cwbox();
 	        	window.location.href=window.location.href;
-	        }else if(data.message=="no login"){
+	        }else if(data.message=="not login"){
 	        	alert("请先登录");
 	        }else if(data.message=="system wrong"){
 	        	alert("系统繁忙");
 	        	window.location.href=window.location.href;
+	        }else if(data.message=="no id"){
+	        	alert("参数错误，请刷新页面");
+	        }else if(data.message=="already"){
+	        	alert("已经存在相同名字的表");
+	        }else{
+	        	alert("未知的错误");
 	        }
 		}
 		});
 	}else{
 		alert("请输入完整的信息");
 	}
+}
+function ajax_save(){
+	$.ajax({
+		cache: false,
+		type: "POST",
+		url:"ajax_userinfo.php?method=setinfo&id="+Guuid,
+		async: true,
+		data: $("#infoform").serialize(),
+		dataType:"json",
+		error: function(request){
+			alert("连接失败");
+		},
+		success: function(data) {
+	        if(data.state=="success"){
+	        	alert("保存成功");
+	        	cleardata();
+	        }else if(data.message=="not login"){
+	        	alert("请先登录");
+	        }else if(data.message=="system wrong"){
+	        	alert("系统繁忙,请检查数据完整性");
+	        	window.location.href=window.location.href;
+	        }else if(data.message=="method wrong"){
+	        	alert("调用错误的函数名");
+	        }else if(data.message=="no id"){
+	        	alert("参数错误，请刷新页面");
+	        }else{
+	        	alert("未知的错误");
+	        }
+		}
+	});
+	return false;
+}
+function ajax_get(){
+	$.ajax({
+		cache: false,
+		type: "POST",
+		url:"ajax_userinfo.php?method=getinfo&id="+Guuid,
+		async: true,
+		dataType:"json",
+		error: function(request){
+			alert("连接失败");
+		},
+		success: function(data) {
+	        if(data.state=="success"){
+	        	var d=data.result;
+	        	$("#area").val(d.area);
+	        	$("#pay").val(d.wage);
+	        	$("#name").val(d.name);
+	        	$("#address").val(d.address);
+	        	$("#phone").val(d.phone);
+	        	$("#type option:selected").val(d.type);
+	        	$("#eprice").val(d.eprice);
+	        	$("#wprice").val(d.wprice);
+	        	$("#note").val(d.note);
+	        }else if(data.message=="not login"){
+	        	alert("请先登录");
+	        }else if(data.message=="system wrong"){
+	        	alert("系统繁忙,请检查数据完整性");
+	        	window.location.href=window.location.href;
+	        }else if(data.message=="method wrong"){
+	        	alert("调用错误的函数名");
+	        }else if(data.message=="no id"){
+	        	alert("参数错误，请刷新页面");
+	        }else{
+	        	alert("未知的错误");
+	        }
+		}
+	});
+	return false;
 }
 var edisplay=false;
 var wdisplay=false;
