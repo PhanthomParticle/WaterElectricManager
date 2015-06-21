@@ -2995,41 +2995,54 @@ a, a:link, a:hover, a:active {
 /* 页面
  ---------------------------------------------------------- */
 html, body {
+  /*position: absolute;*/
   width: 100%;
   height: 100%;
   font: 17px/1.5 normal Microsoft Yahei, "黑体", "宋体", Helvetica, Arial, sans-serif; }
 
 #header {
-  position: fixed;
+  /*position: fixed;*/
   top: 0;
   width: 100%;
   height: 50px;
-  background: #356aa0;
-  opacity: .9; }
-
-.menu li {
-  width: 25%;
-  height: 50px;
-  float: left; }
-
-.menu li a {
-  display: inline-block;
-  width: 100%;
+  opacity: .9; 
+  z-index: 20;
+background-color: #2198d5;}
+.item{
+  display: block;
+  /*width: 100%;*/
+  width: 20%;
   height: 100%;
-  font: 36px/50px normal Microsoft Yahei, "黑体", "宋体", Helvetica, Arial, sans-serif;
-  color: #fff;
-  text-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.3), 0px 1px 2px white;
-  text-align: center; }
-  .menu li a:hover {
-    background: #2f5d8d; }
-
-#container {
+  font-size: 30px;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  float: left;
+}
+.item:hover{
+  background-color: #196f9b;
+  color: white;
+}
+.active{
+  background-color: #196f9b;
+  color: white;
+}
+.user{
+  width: 100%;
+  display: block;
+  padding: 5px 10px;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+.user:hover{
+  background-color: #eee;
+  color: #1D9BDC;
+}
+#iframe {
+  /*position: absolute;*/
   width: 100%;
   height: 100%; }
 
-iframe {
-  width: 100%;
-  height: 678px;
-  margin: 50px 0 0 0; }
 
 /*# sourceMappingURL=style.css.map */
