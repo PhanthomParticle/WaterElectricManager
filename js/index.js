@@ -3,17 +3,15 @@
  * @version           1.0.0
  * @last-time         2015.6.7
  */
-
+var lastobj=null;
 $(document).ready(function() {
-	iframeInitialize(iframe);
+	$("#header a").click(function(){
+		if(lastobj!=null){
+			lastobj.removeClass("active");
+		}
+		$(this).addClass("active");
+		$("#iframe").attr( "src",$(this).attr("href") );
+		lastobj=$(this);
+		return false;
+	});
 });
-
-
-// iframe 初始化
-// @para: [iframName]
-function iframeInitialize (iframeName) {
-	var iframe,
-		iframeHeight = (document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight) - 50 + 'px';
-	iframeName ? iframe = $("iframe[name=iframeName]") : iframe = $("iframe");
-	iframe.css('height', iframeHeight);
-}
