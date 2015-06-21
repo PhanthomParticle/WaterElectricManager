@@ -18,7 +18,7 @@
 			));
 			$flag=strcmp($password, $datas[0]["password"]);
 			if($flag==0 && $datas[0]["level"]==2){
-				$_SESSION["admin"]=2;
+				$_SESSION["level"]=2;
 				$_SESSION["adminname"]=$datas[0]["name"];
 				$result=array();
 				$result["state"]="success";
@@ -26,7 +26,7 @@
 				$json_result=json_encode($result);
 				echo $json_result;
 			}else if($flag==0 && $datas[0]["level"]==1){
-				$_SESSION["admin"]=1;
+				$_SESSION["level"]=1;
 				$_SESSION["adminname"]=$datas[0]["name"];
 				$result=array();
 				$result["state"]="success";
