@@ -94,6 +94,14 @@
 		<button id="search" onclick="searchBy()">查找</button>
 	</p>
 	<ul id="list">
+		<li class="navi">
+			<span class="autoid">序号</span>
+			<span class="pay">工资编号</span>
+			<span class="name">姓名</span>
+			<span class="address">地址</span>
+			<span class="phone">电话</span>
+			<span class="note">备注</span>
+		</li>
 		<?php
 			if($_GET["type"]!="" && $_GET["value"]!=""){
 				$datas=$databases->select("user",array(

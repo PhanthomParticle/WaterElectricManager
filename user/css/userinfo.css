@@ -10,10 +10,10 @@ body{
 	background-color: #eee;
 }
 .title{
-	height: 26px;
-	background-color: #ccc;
-	line-height: 26px;
+	height: 23px;
+	background-color: #ddd;
 	font-size: 20px;
+	padding: 5px;
 	text-align: center;
 }
 .return{
@@ -41,8 +41,9 @@ body{
 }
 .item{
 	display: inline-block;
-	width: 100px;
+	width: 110px;
 	font-size: 16px;
+	text-align: right;
 	padding: 5px;
 }
 #userinfo ul input{
@@ -99,6 +100,8 @@ body{
 	border: 1px solid #aaa;
 	border-radius: 5px;
 	margin-top: 5px;
+	margin-left: 5px;
+	text-align: left;
 }
 #electric ul li span{
 	display: inline-block;
@@ -141,6 +144,8 @@ body{
 	border: 1px solid #aaa;
 	border-radius: 5px;
 	margin-top: 5px;
+	margin-left: 5px;
+	text-align: left;
 }
 #water ul li span{
 	display: inline-block;

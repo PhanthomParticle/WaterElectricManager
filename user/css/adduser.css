@@ -10,9 +10,10 @@ body{
 	background-color: #eee;
 }
 .title{
-	height: 26px;
-	background-color: #ccc;
-	line-height: 26px;
+	height: 23px;
+	background-color: #ddd;
+	/*line-height: 26px;*/
+	padding: 5px;
 	font-size: 20px;
 	text-align: center;
 }
@@ -41,9 +42,10 @@ body{
 }
 .item{
 	display: inline-block;
-	width: 100px;
+	width: 110px;
 	font-size: 16px;
 	padding: 5px;
+	text-align: right;
 }
 #userinfo ul input{
 	width: 200px;
@@ -103,6 +105,7 @@ body{
 #electric ul li span{
 	display: inline-block;
 	margin-right: 5px;
+	width: 100px;
 }
 .add{
 	display: inline-block;

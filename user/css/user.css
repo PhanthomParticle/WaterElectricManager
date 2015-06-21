@@ -63,27 +63,56 @@ p span{
 	display: inline-block;
 	width: 90%;
 	text-align: left;
-	border: 1px solid #1D9BDC;
+	/*border: 1px solid #1D9BDC;*/
 	padding: 3px;
-	background-color: rgba(230,230,230,0.7);
-	margin: 3px 5px;
+	background-color: rgba(220,220,220,0.8);
+	margin: 2px 5px;
 	color: #1D9BDC;
 	font-size: 16px;
 	cursor: pointer;
 	border-radius: 2px;
-	box-shadow: 0px 1px 1px #ccc;
+	/*box-shadow: 0px 1px 1px #ccc;*/
+	border-bottom: none;
+}
+.navi{
+	background-color: #1D9BDC !important;
+	color: #eee !important;
+}
+.navi span{
+	float: left;
+	border-right: 1px solid white !important;
 }
 #list li:hover{
 	background-color: #1D9BDC;
 	color: #eee;
 }
 #list li span{
+	display: inline-block;
 	padding: 0 5px;
+	border-right: 1px solid #888;
 }
 #list li a{
 	float: right;
 	padding: 0 5px;
 	color: red;
+}
+.autoid{
+	width: 5%;
+}
+.pay{
+	width: 9%;
+}
+.name{
+	width: 10%;
+}
+.address{
+	width: 16%;
+}
+.phone{
+	width: 16%;
+}
+.note{
+	width: 14%;
 }
 #pager{
 	text-align: center;

@@ -1,3 +1,7 @@
+$(document).ready(function(){
+	$("#eprice").val( $("#etype option:selected").val() );
+	$("#wprice").val( $("#wtype option:selected").val() );
+})
 function ajax_adduser(){
 	var sure=confirm("提交前请先确认数据完整性！确认提交？");
 	if(sure){
