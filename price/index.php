@@ -1,20 +1,19 @@
 <?php
-	// error_reporting(null);
-	// session_start();
-	// include("../medoo.php");
-	// $databases=new medoo();
-	// $type=0;
-	// $type=$_GET["type"];
-	// $login=false;
-	// if(isset($_SESSION["adminname"])){
-	// 	$login=true;
-	// }else{
-	// 	$login=false;
-	// }
-	// 		if(!$login){
-	// 			header("Location: login.php");
-	// 			exit;
-	// 		}
+	error_reporting(null);
+	session_start();
+	include("../medoo.php");
+	$databases=new medoo();
+	$type=0;
+	$type=$_GET["type"];
+	$login=false;
+	if(isset($_SESSION["adminname"])){
+		$login=true;
+	}else{
+		$login=false;
+		echo "<h1>你无权管理此页面</h1>";
+		exit;
+	}
+	
 
 ?>
 <!DOCTYPE html>

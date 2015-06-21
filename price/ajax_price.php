@@ -9,7 +9,7 @@
 		if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 			if(isset($_GET["id"])){
 				$id=$_GET["id"];
-				$datas=$databases->delete("eprice",arrar(
+				$datas=$databases->delete("eprice",array(
 					"id"=>$id
 				));
 				if($datas>0){
@@ -44,7 +44,7 @@
 		if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 			if(isset($_GET["id"])){
 				$id=$_GET["id"];
-				$datas=$databases->delete("wprice",arrar(
+				$datas=$databases->delete("wprice",array(
 					"id"=>$id
 				));
 				if($datas>0){
@@ -79,7 +79,7 @@
 		if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 			$name=$_POST["name"];
 			$price=$_POST["price"];
-			$datas=$databases->insert("eprice",arrar(
+			$datas=$databases->insert("eprice",array(
 				"name"=>$name,
 				"price"=>$price
 			));
@@ -108,7 +108,7 @@
 		if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 			$name=$_POST["name"];
 			$price=$_POST["price"];
-			$datas=$databases->insert("wprice",arrar(
+			$datas=$databases->insert("wprice",array(
 				"name"=>$name,
 				"price"=>$price
 			));
@@ -139,7 +139,7 @@
 				$id=$_GET["id"];
 				$name=$_POST["name"];
 				$price=$_POST["price"];
-				$datas=$databases->update("eprice",arrar(
+				$datas=$databases->update("eprice",array(
 					"name"=>$name,
 					"price"=>$price
 				),array(
@@ -179,7 +179,7 @@
 				$id=$_GET["id"];
 				$name=$_POST["name"];
 				$price=$_POST["price"];
-				$datas=$databases->update("wprice",arrar(
+				$datas=$databases->update("wprice",array(
 					"name"=>$name,
 					"price"=>$price
 				),array(
