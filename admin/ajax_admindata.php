@@ -5,7 +5,7 @@
 	$databases=new medoo();
 	$method=$_GET["method"];
 	if($method=="addD"){
-		if(isset($_SESSION["admin"]) && $_SESSION["admin"]==2){
+		if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 			$username=$_POST["username"];
 			$name=$_POST["name"];
 			$password=$_POST["password"];
@@ -31,7 +31,7 @@
 		}
 	}else if($method=="delD"){
 		$id=$_GET["id"];
-		if(isset($_SESSION["admin"]) && $_SESSION["admin"]==2){
+		if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 			if($id!=""){
 				$datas=$databases->delete("service",array(
 					"id"=>$id
