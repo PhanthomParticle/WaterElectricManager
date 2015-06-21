@@ -23,8 +23,8 @@ function DisplayData(){
 				for(var j=0; j<e.length; ++j){
 					html+="<li>";
 						html+="<span>"+e[j].name+"</span>";
-						html+="<input type=\"text\" name=\"u"+i+"p"+j+"\" id=\"u"+i+"p"+j+"\" readonly=\"true\" value=\""+e[j].pvalue+"\">";
-						html+="<input type=\"text\" name=\"u"+i+"e"+j+"\" id=\"u"+i+"e"+j+"\">";
+						html+="<input type=\"text\" name=\"u"+i+"e"+j+"p\" id=\"u"+i+"p"+j+"p\" readonly=\"true\" value=\""+e[j].pvalue+"\">";
+						html+="<input type=\"text\" name=\"u"+i+"e"+j+"c\" id=\"u"+i+"e"+j+"c\">";
 						html+="<span class=\"note\">"+e[j].note+"</span>";
 					html+="</li>";
 				}
@@ -33,8 +33,8 @@ function DisplayData(){
 				for(var k=0; k<w.length; ++k){
 					html+="<li>";
 						html+="<span>"+w[k].name+"</span>";
-						html+="<input type=\"text\" name=\"u"+i+"w"+k+"\" id=\"u"+i+"w"+k+"\" value=\""+w[k].pvalue+"\">";
-						html+="<input type=\"text\" name=\"u"+i+"w"+k+"\" id=\"u"+i+"w"+k+"\">";
+						html+="<input type=\"text\" name=\"u"+i+"w"+k+"p\" id=\"u"+i+"w"+k+"p\" value=\""+w[k].pvalue+"\">";
+						html+="<input type=\"text\" name=\"u"+i+"w"+k+"c\" id=\"u"+i+"w"+k+"c\">";
 					html+="</li>";
 				}
 			html+="</ul>";
@@ -42,5 +42,55 @@ function DisplayData(){
 		$("#upload").html(html);
 	}else{
 		alert("参数错误，请刷新页面");
+	}
+}
+var save=true;
+function SaveData(){
+	if(save){
+		if("undefined" != typeof UserData){
+			save=false;
+			for(var i=0; i<UserData.length; ++i){
+				
+				for(var j=0; j<UserData[i].electric.length; ++j){
+					UserData[i].electric[j].cvalue=$("#u"+i+"e"+j+"c").val();
+				}
+				
+				for(var k=0; k<UserData[i].water[k].length; ++k){
+					UserData[i].water[k].cvalue=$("#u"+i+"w"+k+"c").val();
+				}
+			}
+			var JsonData=JSON.stringify(UserData);
+			
+			$.ajax({
+				cache: false,
+				type: "POST",
+				url:"ajax_upload.php?method=upwage",
+				async: true,
+				data: {"JsonData":JsonData},
+				dataType:"json",
+				error: function(request){
+					alert("连接失败");
+					save=true;
+				},
+				success: function(data) {
+			        if(data.state=="success"){
+			        	alert("数据保存成功");
+			        }else if(data.message=="not login"){
+			        	alert("请先登录");
+			        }else if(data.message=="system wrong"){
+			        	alert("系统繁忙,请检查数据完整性");
+			        }else if(data.message=="method wrong"){
+			        	alert("调用错误的函数名");
+			        }else{
+			        	alert("未知的错误");
+			        }
+			        save=true;
+				}
+			});
+		}else{
+			alert("参数错误，请刷新页面");
+		}
+	}else{
+		alert("请不要重复提交");
 	}
 }
