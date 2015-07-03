@@ -21,6 +21,32 @@ body{
 	font-size: 18px;
 	margin-left: 5px;
 }
+.navi{
+	display: inline-block;
+	min-width: 45%;
+	width: 80%;
+	font-size: 16px;
+	padding: 3px;
+	border: 1px solid #aaa;
+	margin-top: 5px;
+	margin-left: 5px;
+	text-align: left;
+	background-color: #1D9BDC !important;
+	color: #eee !important;
+}
+.navi span{
+	float: left;
+	border-right: 1px solid white !important;
+}
+.nvname{
+	width: 25%;
+}
+.nvrate{
+	width: 10%;
+}
+.nvnote{
+	width: 35%;
+}
 #userinfo{
 	margin-bottom: 10px;
 }
@@ -95,17 +121,17 @@ body{
 #electric ul li{
 	display: inline-block;
 	min-width: 45%;
+	width: 80%;
 	font-size: 16px;
 	padding: 3px;
 	border: 1px solid #aaa;
-	border-radius: 5px;
-	margin-top: 5px;
 	margin-left: 5px;
 	text-align: left;
 }
 #electric ul li span{
 	display: inline-block;
-	margin-right: 5px;
+	border-right: 1px solid #999;
+	margin-left: 5px;
 }
 .add{
 	display: inline-block;
@@ -139,17 +165,17 @@ body{
 #water ul li{
 	display: inline-block;
 	min-width: 45%;
+	width: 80%;
 	font-size: 16px;
 	padding: 3px;
 	border: 1px solid #aaa;
-	border-radius: 5px;
-	margin-top: 5px;
 	margin-left: 5px;
 	text-align: left;
 }
 #water ul li span{
 	display: inline-block;
-	margin-right: 5px;
+	border-right: 1px solid #999;
+	margin-left: 5px;
 }
 #ebox{
 	opacity: 0;

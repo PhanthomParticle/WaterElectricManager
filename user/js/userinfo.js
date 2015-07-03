@@ -59,8 +59,8 @@ $(document).ready(function(){
 		var id=$(this).attr("href") || null;
 		if(id!=null){
 			Geid=id;
-			var ename=$(this).prevAll()[5].innerHTML;
-			var rate=$(this).prevAll()[3].innerHTML;
+			var ename=$(this).prevAll()[3].innerHTML;
+			var rate=$(this).prevAll()[2].innerHTML;
 			var notee=$(this).prevAll()[1].innerHTML;
 			$("#ename").val(ename);
 			$("#rate").val(rate);
@@ -78,7 +78,7 @@ $(document).ready(function(){
 		var id=$(this).attr("href") || null;
 		if(id!=null){
 			Gwid=id;
-			var wname=$(this).prevAll()[3].innerHTML;
+			var wname=$(this).prevAll()[2].innerHTML;
 			var notew=$(this).prevAll()[1].innerHTML;
 			$("#wname").val(wname);
 			$("#initw").val("此项无效,不用填");
@@ -103,6 +103,7 @@ function openeadd(){
 	$("#efunc").html(html);
 	cebox();
 }
+//打开增加水表对话框
 function openwadd(){
 	var html="<span onclick=\"wadd()\">增加</span><span onclick=\"cwbox()\">取消</span>";
 	$("#wname").val("");
@@ -111,14 +112,17 @@ function openwadd(){
 	$("#wfunc").html(html);
 	cwbox();
 }
+//改变电价类型
 function Cetype(){
 	var eprice=$("#etype option:selected").val();
 	$("#eprice").val(eprice);
 }
+//改变水价类型
 function Cwtype(){
 	var wprice=$("#wtype option:selected").val();
 	$("#wprice").val(wprice);
 }
+//修改电表
 function modifyE(){
 	var ename=$("#ename").val();
 	var rate=$("#rate").val();
@@ -127,7 +131,7 @@ function modifyE(){
 		$.ajax({
 		cache: false,
 		type: "POST",
-		url:"ajax_userinfo.php?method=modifyE",
+		url:"ajax_userinfo.php?method=modiE",
 		async: true,
 		data: {"id":Geid,"ename":ename,"rate":rate,"notee":notee},
 		dataType:"json",
@@ -155,6 +159,7 @@ function modifyE(){
 		alert("请输入完整的信息");
 	}
 }
+//修改水表
 function modifyW(){
 	var wname=$("#wname").val();
 	var notew=$("#notew").val();
@@ -162,7 +167,7 @@ function modifyW(){
 		$.ajax({
 		cache: false,
 		type: "POST",
-		url:"ajax_userinfo.php?method=modifyW",
+		url:"ajax_userinfo.php?method=modiW",
 		async: true,
 		data: {"id":Gwid,"wname":wname,"notew":notew},
 		dataType:"json",
@@ -190,6 +195,7 @@ function modifyW(){
 		alert("请输入完整的信息");
 	}
 }
+//增加电表
 function eadd(){
 	var ename=$("#ename").val();
 	var rate=$("#rate").val();
@@ -229,6 +235,7 @@ function eadd(){
 		alert("请输入完整的信息");
 	}
 }
+//增加水表
 function wadd(){
 	var wname=$("#wname").val();
 	var initw=$("#initw").val();
@@ -267,6 +274,7 @@ function wadd(){
 		alert("请输入完整的信息");
 	}
 }
+//Ajax保存用户信息
 function ajax_save(){
 	$.ajax({
 		cache: false,
@@ -281,11 +289,10 @@ function ajax_save(){
 		success: function(data) {
 	        if(data.state=="success"){
 	        	alert("保存成功");
-	        	cleardata();
 	        }else if(data.message=="not login"){
 	        	alert("请先登录");
 	        }else if(data.message=="system wrong"){
-	        	alert("系统繁忙,请检查数据完整性");
+	        	alert("保存失败,信息没有更新或请检查数据完整性");
 	        	window.location.href=window.location.href;
 	        }else if(data.message=="method wrong"){
 	        	alert("调用错误的函数名");
@@ -298,6 +305,7 @@ function ajax_save(){
 	});
 	return false;
 }
+//Ajax提交信息更改
 function ajax_get(){
 	$.ajax({
 		cache: false,
@@ -316,7 +324,9 @@ function ajax_get(){
 	        	$("#name").val(d.name);
 	        	$("#address").val(d.address);
 	        	$("#phone").val(d.phone);
-	        	$("#type option:selected").val(d.type);
+	        	$("#type").val(d.type);
+	        	$("#etype").val(d.eprice);
+	        	$("#wtype").val(d.wprice);
 	        	$("#eprice").val(d.eprice);
 	        	$("#wprice").val(d.wprice);
 	        	$("#note").val(d.note);

@@ -34,8 +34,9 @@
 	</script>
 </head>
 <body>
-	
-	<p class="title"><a href="user.php" class="return">&lt;返回</a>用户详细信息</p>
+	<?php
+		echo "<p class=\"title\"><a href=\"user.php?page=".$_GET["page"]."\" class=\"return\">&lt;返回</a>用户详细信息</p>";
+	?>
 	<!-- 电表弹出框 -->
 	<div id="ebox">
 		<form action="" id="eform">
@@ -166,6 +167,11 @@
 	<p class="title">用户电表信息 <span class="add" onclick="openeadd()">增加电表</span></p>
 	<div id="electric">
 		<ul>
+			<li class="navi">
+				<span class="nvname">表名</span>
+				<span class="nvrate">倍率</span>
+				<span class="nvnote">备注</span>
+			</li>
 		<?php
 			$datas=$databases->select("electric",array(
 				"id",
@@ -177,13 +183,9 @@
 			));
 			for($i=0; $i<count($datas); ++$i){
 				echo "<li>";
-					echo "<span>".($i+1)."</span>";
-					echo "<span>编号:</span>";
-					echo "<span>".$datas[$i]["name"]."</span>";
-					echo "<span>倍率:</span>";
-					echo "<span>".$datas[$i]["rate"]."</span>";
-					echo "<span>备注:</span>";
-					echo "<span>".$datas[$i]["note"]."</span>";
+					echo "<span class=\"nvname\">".$datas[$i]["name"]."</span>";
+					echo "<span class=\"nvrate\">".$datas[$i]["rate"]."</span>";
+					echo "<span class=\"nvnote\">".$datas[$i]["note"]."</span>";
 					echo "<a href=\"".$datas[$i]["id"]."\" class=\"delE\">删除</a>";
 					echo "<a href=\"".$datas[$i]["id"]."\" class=\"modifyE\">修改</a>";
 				echo "</li>";
@@ -196,6 +198,10 @@
 	<p class="title">用户水表信息 <span class="add" onclick="openwadd()">增加水表</span></p>
 	<div id="water">
 		<ul>
+			<li class="navi">
+				<span class="nvname">表名</span>
+				<span class="nvnote">备注</span>
+			</li>
 		<?php
 			$datas=$databases->select("water",array(
 				"id",
@@ -206,11 +212,8 @@
 			));
 			for($i=0; $i<count($datas); ++$i){
 				echo "<li>";
-					echo "<span>".($i+1)."</span>";
-					echo "<span>编号:</span>";
-					echo "<span>".$datas[$i]["name"]."</span>";
-					echo "<span>备注:</span>";
-					echo "<span>".$datas[$i]["note"]."</span>";
+					echo "<span class=\"nvname\">".$datas[$i]["name"]."</span>";
+					echo "<span class=\"nvnote\">".$datas[$i]["note"]."</span>";
 					echo "<a href=\"".$datas[$i]["id"]."\" class=\"delW\">删除</a>";
 					echo "<a href=\"".$datas[$i]["id"]."\" class=\"modifyW\">修改</a>";
 				echo "</li>";

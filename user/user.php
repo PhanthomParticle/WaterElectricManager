@@ -61,7 +61,7 @@
 	<p>
 		<?php
 			
-			
+			//输出筛选条件select
 			echo "<select name=\"type\" id=\"type\">";
 			if($_GET["type"]=="area"){
 				echo "<option value=\"area\" selected=\"true\">区号</option>";
@@ -95,7 +95,7 @@
 	</p>
 	<ul id="list">
 		<li class="navi">
-			<span class="autoid">序号</span>
+			<span class="autoid">区号</span>
 			<span class="pay">工资编号</span>
 			<span class="name">姓名</span>
 			<span class="address">地址</span>
@@ -106,6 +106,7 @@
 			if($_GET["type"]!="" && $_GET["value"]!=""){
 				$datas=$databases->select("user",array(
 					"uid",
+					"area",
 					"wage",
 					"name",
 					"address",
@@ -120,6 +121,7 @@
 			}else{
 				$datas=$databases->select("user",array(
 					"uid",
+					"area",
 					"wage",
 					"name",
 					"address",
@@ -134,13 +136,13 @@
 			$no=($page-1)*$pageSize+1;
 			for($i=0; $i<count($datas); ++$i){
 				echo "<li>";
-					echo "<span class=\"autoid\">".$no."</span>";
+					echo "<span class=\"autoid\">".$datas[$i]["area"]."</span>";
 					echo "<span class=\"pay\">".$datas[$i]["wage"]."</span>";
 					echo "<span class=\"name\">".$datas[$i]["name"]."</span>";
 					echo "<span class=\"address\">".$datas[$i]["address"]."</span>";
 					echo "<span class=\"phone\">".$datas[$i]["phone"]."</span>";
 					echo "<span class=\"note\">".$datas[$i]["note"]."</span>";
-					echo "<a href=\"userinfo.php?id=".$datas[$i]["uid"]."\" class=\"detail\">详情</a>";
+					echo "<a href=\"userinfo.php?id=".$datas[$i]["uid"]."&page=".$page."\" class=\"detail\">详情</a>";
 					echo "<a href=\"".$datas[$i]["uid"]."\" class=\"delete\">删除</a>";
 					if($datas[$i]["state"]==1){
 						echo "<a href=\"".$datas[$i]["uid"]."\" class=\"cancel\">注销</a>";

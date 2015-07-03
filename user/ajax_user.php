@@ -53,7 +53,7 @@
 		}
 	}else if($method=="delete"){
 		$id=$_GET["id"];
-		if(isset($_SESSION["adminname"])){
+		if(isset($_SESSION["adminname"]) && $_SESSION["level"]==2){
 			if($id!=""){
 				$datas=$databases->delete("user",array(
 					"uid"=>$id
