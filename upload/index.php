@@ -32,9 +32,9 @@
 	<div id="header">
 		
 		
-		<a href="upwage.php" class="item">非现金用户</a>
-		
-		
+		<a href="upwage.php" class="item">代扣款用户</a>
+		<a href="upcash.php" class="item">交现金用户</a>
+		<a href="user.php" class="item">押金管理</a>
 		
 		
 		

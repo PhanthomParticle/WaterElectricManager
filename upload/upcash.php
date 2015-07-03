@@ -24,7 +24,7 @@
 		"AND"=>array(
 			"state"=>1,
 			"OR"=>array(
-				"type"=>array(1,2)
+				"type"=>array(3)
 			)
 		),
 		"ORDER"=>array(
@@ -50,21 +50,20 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-	<title>代扣用户数据录入</title>
+	<title>现金用户数据录入</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 	<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
-	<link rel="stylesheet" type="text/css" href="css/upwage.css">
+	<link rel="stylesheet" type="text/css" href="css/upcash.css">
 	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="../js/json2.js"></script>
-	<script type="text/javascript" src="js/upwage.js"></script>
+	<script type="text/javascript" src="js/upcash.js"></script>
 
 	<script type="text/javascript">
 	<?php
 		//查询用户基本信息
 		$datas=$databases->select("user",array(
 			"uid",
-			"wage",
 			"name",
 			"address",
 			"phone",
@@ -74,7 +73,7 @@
 			"AND"=>array(
 				"state"=>1,
 				"OR"=>array(
-					"type"=>array(1,2)
+					"type"=>array(3)
 				)
 			),
 			"ORDER"=>array(
@@ -102,45 +101,25 @@
 			$result[$i]["electric"]=$electric;
 			for($j=0; $j<count($result[$i]["electric"]); ++$j){
 				$date=GetYearMonth();
-				//获取本月的读表数
+				//获取上次的读表数
 				$cvalue=$databases->select("evalue",array(
-					"pvalue",
 					"cvalue"
 					),array(
 					"AND"=>array(
 						"uid"=>$result[$i]["uid"],
-						"date"=>$date,
 						"eid"=>$result[$i]["electric"][$j]["id"]
 					),"ORDER"=>array(
 						"time DESC"
-					)
+					),"LIMIT"=>array(0,1)
 				));
-				//判断本月是否已经上传了读表数
+				//判断上次是否已经上传了读表数
 				if(count($cvalue)>0){
-					$result[$i]["electric"][$j]["pvalue"]=$cvalue[0]["pvalue"];
-					$result[$i]["electric"][$j]["cvalue"]=$cvalue[0]["cvalue"];
+					$result[$i]["electric"][$j]["pvalue"]=$cvalue[0]["cvalue"];
 				}else{
-					//把本月读表数设为空
-					$result[$i]["electric"][$j]["cvalue"]="";
-					//查询非本月读表数
-					$pvalue=$databases->select("evalue",array(
-						"cvalue"
-						),array(
-						"AND"=>array(
-							"uid"=>$result[$i]["uid"],
-							"date[!]"=>$date,
-							"eid"=>$result[$i]["electric"][$j]["id"]
-						),"ORDER"=>array(
-							"time DESC"
-						),"LIMIT"=>array(0,1)
-					));
-					//判断上次是否有数据
-					if(count($pvalue)>0){
-						$result[$i]["electric"][$j]["pvalue"]=$pvalue[0]["cvalue"];
-					}else{
-						$result[$i]["electric"][$j]["pvalue"]=$result[$i]["electric"][$j]["init"];
-					}
+					$result[$i]["electric"][$j]["pvalue"]=$result[$i]["electric"][$j]["init"];
 				}
+				//把本月读表数设为空
+				$result[$i]["electric"][$j]["cvalue"]="";
 			}//查询用户电表信息结束
 
 			//查询用户水表信息
@@ -156,45 +135,25 @@
 			$result[$i]["water"]=$water;
 			for($k=0; $k<count($result[$i]["water"]); ++$k){
 				$date=GetYearMonth();
-				//获取本月的读表数
+				//获取上次的读表数
 				$cvalue=$databases->select("wvalue",array(
-					"pvalue",
 					"cvalue"
 					),array(
 					"AND"=>array(
 						"uid"=>$result[$i]["uid"],
-						"date"=>$date,
 						"wid"=>$result[$i]["water"][$k]["id"]
 					),"ORDER"=>array(
 						"time DESC"
-					)
+					),"LIMIT"=>array(0,1)
 				));
-				//判断本月是否已经上传了读表数
+				//判断上次是否已经上传了读表数
 				if(count($cvalue)>0){
-					$result[$i]["water"][$k]["pvalue"]=$cvalue[0]["pvalue"];
-					$result[$i]["water"][$k]["cvalue"]=$cvalue[0]["cvalue"];
+					$result[$i]["water"][$k]["pvalue"]=$cvalue[0]["cvalue"];
 				}else{
-					//把本月读表数设为空
-					$result[$i]["water"][$k]["cvalue"]="";
-					//查询非本月读表数
-					$pvalue=$databases->select("wvalue",array(
-						"cvalue"
-						),array(
-						"AND"=>array(
-							"uid"=>$result[$i]["uid"],
-							"date[!]"=>$date,
-							"wid"=>$result[$i]["water"][$k]["id"]
-						),"ORDER"=>array(
-							"time DESC"
-						),"LIMIT"=>array(0,1)
-					));
-					//判断上次是否有数据
-					if(count($pvalue)>0){
-						$result[$i]["water"][$k]["pvalue"]=$pvalue[0]["cvalue"];
-					}else{
-						$result[$i]["water"][$k]["pvalue"]=$result[$i]["water"][$k]["init"];
-					}
+					$result[$i]["water"][$k]["pvalue"]=$result[$i]["water"][$k]["init"];
 				}
+				//把本月读表数设为空
+				$result[$i]["water"][$k]["cvalue"]="";
 			}//查询用户水表信息结束
 		}
 		echo "var UserData=".json_encode($result).";";
@@ -206,37 +165,38 @@
 		<!-- <ul>
 			<input type="hidden" name="u0" id="u0" value="sadlkjrlk2143214">
 			<p class="title">
-				<span>工资编号:1234567</span>
 				<span>姓名:蓝先生</span>
 				<span>地址:北区36栋一单元6024</span>
 				<span>电话:18720960056</span>
 			</p>
 			<li>
-				<span class="tbn">36栋1号</span>
+				<span>36栋1号</span>
 				<input type="text" name="u0e0" id="u0e0" readonly="true">
 				<input type="text" name="u0e1" id="u0e1">
 				<span class="note">申请停用</span>
 			</li>
 			<li>
-				<span class="tbn">36栋1号</span>
-				<input type="text" name="u0e0" id="u0e0" readonly="true">
+				<span>36栋1号</span>
+				<input type="text" name="u0e0" id="u0e0">
 				<input type="text" name="u0e1" id="u0e1">
-				<span class="note">申请停用</span>
 			</li>
 			<li>
-				<span class="tbn">36栋1号</span>
-				<input type="text" name="u0e0" id="u0e0" readonly="true">
+				<span>36栋1号</span>
+				<input type="text" name="u0e0" id="u0e0">
 				<input type="text" name="u0e1" id="u0e1">
-				<span class="note">申请停用</span>
+			</li>
+			<p class="sort">水表</p>
+			<li>
+				<span>36栋1号</span>
+				<input type="text" name="u0w0" id="u0w0">
+				<input type="text" name="u0w1" id="u0w1">
 			</li>
 			<li>
-				<span class="tbn">36栋1号</span>
-				<input type="text" name="u0e0" id="u0e0" readonly="true">
-				<input type="text" name="u0e1" id="u0e1">
-				<span class="note">申请停用</span>
-			</li> -->
-			
-		</ul>
+				<span>36栋1号</span>
+				<input type="text" name="u0w0" id="u0w0">
+				<input type="text" name="u0w1" id="u0w1">
+			</li>
+		</ul> -->
 		
 		
 	</div>

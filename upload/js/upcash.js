@@ -2,7 +2,7 @@ $(document).ready(function(){
 	DisplayData();
 	$("#start").click(function(){
 		var page=$("#topage").val() || 1;
-		window.location.href="upwage.php?page="+page;
+		window.location.href="upcash.php?page="+page;
 		return false;
 	});
 });
@@ -68,7 +68,7 @@ function SaveData(){
 			$.ajax({
 				cache: false,
 				type: "POST",
-				url:"ajax_upload.php?method=upwage",
+				url:"ajax_upload.php?method=upcash",
 				async: true,
 				data: {"JsonData":JsonData},
 				dataType:"json",
