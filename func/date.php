@@ -5,7 +5,7 @@
 	function GetYearMonth() {
 		return date("Y-m");
 	}
-	function GetDate(){
+	function GetYMD(){
 		return date("Y-m-d");
 	}
 
