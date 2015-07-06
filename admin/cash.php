@@ -18,13 +18,13 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-	<title>录入员管理</title>
+	<title>现金财务管理员</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
 	<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 	<link rel="stylesheet" type="text/css" href="css/admindata.css">
 	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/admindata.js"></script>
+	<script type="text/javascript" src="js/cash.js"></script>
 </head>
 <body>
 	<div id="addServiceBox">
@@ -45,7 +45,7 @@
 		</form>
 	</div>
 	<p>
-		<span id="addService" onclick="closeBox()">增加录入员</span>
+		<span id="addService" onclick="closeBox()">增加管理员</span>
 	</p>
 	<ul id="list">
 		<?php
@@ -55,7 +55,7 @@
 				"name",
 				"password"
 			),array(
-				"level"=>1
+				"level"=>7
 			));
 			for($i=0; $i<count($datas); ++$i){
 				echo "<li>";

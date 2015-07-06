@@ -33,7 +33,11 @@
 		
 		
 		<a href="admindata.php" class="item">录入员管理</a>
-		
+		<a href="wage.php" class="item">工资财务员</a>
+		<a href="card.php" class="item">一卡通财务员</a>
+		<a href="cash.php" class="item">现金财务员</a>
+		<a href="eprice.php" class="item">电价管理</a>
+		<a href="wprice.php" class="item">水价管理</a>
 		
 		
 		

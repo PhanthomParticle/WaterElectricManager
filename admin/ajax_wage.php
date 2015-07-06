@@ -14,7 +14,7 @@
 				"loginname"=>$username,
 				"name"=>$name,
 				"password"=>$password,
-				"level"=>1,
+				"level"=>5,
 				"state"=>1
 			));
 				$result=array();
