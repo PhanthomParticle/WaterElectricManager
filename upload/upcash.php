@@ -206,17 +206,17 @@
 	<div id="pager">
 	<?php
 
-		echo "<a href=\"upwage.php?page=".($page-1)."\">上一页</a>";
+		echo "<a href=\"upcash.php?page=".($page-1)."\">上一页</a>";
 		$pageStart=($col-1)*$colSize+1;
 		$pageEnd=$col*$colSize;
 		for($i=$pageStart; $i<=$pageEnd; ++$i){
 			if($i==$page){
-				echo "<a href=\"upwage.php?page=".$i."\" class=\"active\">".$i."</a>";
+				echo "<a href=\"upcash.php?page=".$i."\" class=\"active\">".$i."</a>";
 			}else{
-				echo "<a href=\"upwage.php?page=".$i."\">".$i."</a>";
+				echo "<a href=\"upcash.php?page=".$i."\">".$i."</a>";
 			}
 		}
-		echo "<a href=\"upwage.php?page=".($page+1)."\">下一页</a>";
+		echo "<a href=\"upcash.php?page=".($page+1)."\">下一页</a>";
 		echo "<input type=\"text\" name=\"topage\" id=\"topage\">";
 		echo "<span>/".$pageCount."</span>";
 		echo "<a href=\"\" id=\"start\">跳转</a>";

@@ -155,7 +155,7 @@
 					echo "<span class=\"address\">".$datas[$i]["address"]."</span>";
 					echo "<span class=\"phone\">".$datas[$i]["phone"]."</span>";
 					echo "<span class=\"note\">".$datas[$i]["note"]."</span>";
-					echo "<a href=\"deposit.php?id=".$datas[$i]["uid"]."&page=".$page."\" class=\"detail\">管理押金</a>";
+					echo "<a href=\"deposit.php?id=".$datas[$i]["uid"]."&url=user.php&page=".$page."\" class=\"detail\">管理押金</a>";
 				echo "</li>";
 				$no++;
 			}

@@ -39,7 +39,7 @@
 		$name=$databases->select("user","name",array(
 			"uid"=>$uuid
 		));
-		echo "<p class=\"title\"><a href=\"user.php?page=".$_GET["page"]."\" class=\"return\">&lt;返回</a>".$name[0]."</p>";
+		echo "<p class=\"title\"><a href=\"".$_GET["url"]."?page=".$_GET["page"]."\" class=\"return\">&lt;返回</a>".$name[0]."</p>";
 	?>
 	<p>
 		<input type="text" name="value" id="value" placeholder="输入押金金额">
@@ -135,7 +135,8 @@
 				$nobacksum=$databases->sum("deposit","money",array(
 					"AND"=>array(
 						"uid"=>$uuid,
-						"isback"=>0
+						"isback"=>0,
+						"ispay"=>1
 					)
 				));
 				echo "<span>".$sum."</span>";
