@@ -19,17 +19,18 @@
 		$page=1;
 	}
 	//计算总页数,$count是总行数
-	$sql1="SELECT DISTINCT uid FROM evalue WHERE state=0";
-	$sql2="SELECT DISTINCT uid FROM wvalue WHERE state=0";
+	//多表查询，查询evalue表的distinct uid WHERE state=0 AND user.type=3
+	$sql1="SELECT DISTINCT evalue.uid FROM evalue LEFT JOIN user ON user.uid=evalue.uid WHERE evalue.state=0 AND user.type=3";
+	$sql2="SELECT DISTINCT wvalue.uid FROM evalue LEFT JOIN user ON user.uid=wvalue.uid WHERE wvalue.state=0 AND user.type=3";
 	$count1=count($databases->query($sql1)->fetchAll());
 	$count2=count($databases->query($sql2)->fetchAll());
 	
 	if($count1>$count2){
 		$count=$count1;
-		$sql="SELECT DISTINCT uid FROM evalue WHERE state=0 ORDER BY time DESC LIMIT ".($page-1)*$pageSize.",".$pageSize;
+		$sql="SELECT DISTINCT evalue.uid FROM evalue LEFT JOIN user ON user.uid=evalue.uid WHERE state=0 AND user.type=3 ORDER BY evalue.time DESC LIMIT ".($page-1)*$pageSize.",".$pageSize;
 	}else{
 		$count=$count2;
-		$sql="SELECT DISTINCT uid FROM wvalue WHERE state=0 ORDER BY time DESC LIMIT ".($page-1)*$pageSize.",".$pageSize;
+		$sql="SELECT DISTINCT wvalue.uid FROM wvalue LEFT JOIN user ON user.uid=wvalue.uid WHERE state=0 AND user.type=3 ORDER BY evalue.time DESC LIMIT ".($page-1)*$pageSize.",".$pageSize;
 	}
 	if(($count%$pageSize)==0){
 		$pageCount=floor($count/$pageSize);
