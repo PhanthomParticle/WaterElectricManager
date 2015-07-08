@@ -20,17 +20,17 @@
 	}
 	//计算总页数,$count是总行数
 	//多表查询，查询evalue表的distinct uid WHERE state=0 AND user.type=3
-	$sql1="SELECT DISTINCT evalue.uid FROM evalue LEFT JOIN user ON user.uid=evalue.uid WHERE evalue.state=0 AND user.type=2";
-	$sql2="SELECT DISTINCT wvalue.uid FROM wvalue LEFT JOIN user ON user.uid=wvalue.uid WHERE wvalue.state=0 AND user.type=2";
+	$sql1="SELECT DISTINCT evalue.uid FROM evalue LEFT JOIN user ON user.uid=evalue.uid WHERE evalue.state=0 AND user.type=3";
+	$sql2="SELECT DISTINCT wvalue.uid FROM wvalue LEFT JOIN user ON user.uid=wvalue.uid WHERE wvalue.state=0 AND user.type=3";
 	$count1=count($databases->query($sql1)->fetchAll());
 	$count2=count($databases->query($sql2)->fetchAll());
 	
 	if($count1>$count2){
 		$count=$count1;
-		$sql="SELECT DISTINCT evalue.uid FROM evalue LEFT JOIN user ON user.uid=evalue.uid WHERE evalue.state=0 AND user.type=2 ORDER BY evalue.time DESC LIMIT ".($page-1)*$pageSize.",".$pageSize;
+		$sql="SELECT DISTINCT evalue.uid FROM evalue LEFT JOIN user ON user.uid=evalue.uid WHERE evalue.state=0 AND user.type=3 ORDER BY evalue.time DESC LIMIT ".($page-1)*$pageSize.",".$pageSize;
 	}else{
 		$count=$count2;
-		$sql="SELECT DISTINCT wvalue.uid FROM wvalue LEFT JOIN user ON user.uid=wvalue.uid WHERE wvalue.state=0 AND user.type=2 ORDER BY wvalue.time DESC LIMIT ".($page-1)*$pageSize.",".$pageSize;
+		$sql="SELECT DISTINCT wvalue.uid FROM wvalue LEFT JOIN user ON user.uid=wvalue.uid WHERE wvalue.state=0 AND user.type=3 ORDER BY wvalue.time DESC LIMIT ".($page-1)*$pageSize.",".$pageSize;
 	}
 	if(($count%$pageSize)==0){
 		$pageCount=floor($count/$pageSize);
@@ -57,7 +57,7 @@
 	<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
 	<link rel="stylesheet" type="text/css" href="css/card.css">
 	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/card.js"></script>
+	<script type="text/javascript" src="js/cash.js"></script>
 </head>
 <body>
 	
@@ -196,20 +196,20 @@
 	<div id="pager">
 	<?php
 
-		echo "<a href=\"card.php?type=".$_GET["type"]."&value=".$_GET["value"]."&page=".($page-1)."\">上一页</a>";
+		echo "<a href=\"cash.php?type=".$_GET["type"]."&value=".$_GET["value"]."&page=".($page-1)."\">上一页</a>";
 		$pageStart=($col-1)*$colSize+1;
 		$pageEnd=$col*$colSize;
 		for($i=$pageStart; $i<=$pageEnd; ++$i){
 			if($i==$page){
-				echo "<a href=\"card.php?type=".$_GET["type"]."&value=".$_GET["value"]."&page=".$i."\" class=\"activep\">".$i."</a>";
+				echo "<a href=\"cash.php?type=".$_GET["type"]."&value=".$_GET["value"]."&page=".$i."\" class=\"activep\">".$i."</a>";
 			}else{
-				echo "<a href=\"card.php?type=".$_GET["type"]."&value=".$_GET["value"]."&page=".$i."\">".$i."</a>";
+				echo "<a href=\"cash.php?type=".$_GET["type"]."&value=".$_GET["value"]."&page=".$i."\">".$i."</a>";
 			}
 		}
-		echo "<a href=\"card.php?type=".$_GET["type"]."&value=".$_GET["value"]."&page=".($page+1)."\">下一页</a>";
+		echo "<a href=\"cash.php?type=".$_GET["type"]."&value=".$_GET["value"]."&page=".($page+1)."\">下一页</a>";
 		echo "<input type=\"text\" name=\"topage\" id=\"topage\">";
 		echo "<span>/".$pageCount."</span>";
-		echo "<a href=\"card.php?type=".$_GET["type"]."&value=".$_GET["value"]."\" id=\"start\">跳转</a>";
+		echo "<a href=\"cash.php?type=".$_GET["type"]."&value=".$_GET["value"]."\" id=\"start\">跳转</a>";
 
 	?>
 		

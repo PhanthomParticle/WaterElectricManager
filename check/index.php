@@ -31,7 +31,9 @@
 <body>
 	<div id="header">
 		
+		<a href="wage.php" class="item">工资未交款</a>
 		<a href="card.php" class="item">一卡通未交款</a>
+		<a href="cash.php" class="item">现金未交款</a>
 		<a href="nopay.php" class="item">未交押金</a>
 		<a href="pay.php" class="item">已交押金</a>
 		<a href="noback.php" class="item">未退押金</a>
